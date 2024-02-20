@@ -3,26 +3,20 @@ package com.tutorial.spring.user.web;
 import com.tutorial.spring.user.domain.User;
 import com.tutorial.spring.user.dto.UserDto;
 import com.tutorial.spring.user.service.UserService;
-import com.tutorial.spring.user.service.UserServiceImpl;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
-
-    @Autowired
-    public UserController(UserServiceImpl userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("/{id}")
     ResponseEntity<Optional<User>> rcGetById(@PathVariable Integer id) {
@@ -46,7 +40,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<?> reDeleteBody(@PathVariable Integer id) {
+    ResponseEntity<?> rcDeleteBody(@PathVariable Integer id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
