@@ -15,4 +15,5 @@ import lombok.Setter;
 public class PropertyDto {
     private String name;
     private String address;
+    private Integer user_id;
 }

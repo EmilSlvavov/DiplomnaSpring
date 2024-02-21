@@ -1,5 +1,6 @@
 package com.tutorial.spring.user.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tutorial.spring.property.domain.Property;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ public class User {
     private String name;
     private String email;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Property> properties;
 }

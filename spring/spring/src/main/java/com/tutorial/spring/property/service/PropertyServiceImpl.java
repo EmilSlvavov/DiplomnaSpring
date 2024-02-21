@@ -4,6 +4,7 @@ import com.tutorial.spring.property.domain.Property;
 import com.tutorial.spring.property.mappers.PropertyMapper;
 import com.tutorial.spring.property.propertyDto.PropertyDto;
 import com.tutorial.spring.property.repository.PropertyRepository;
+import com.tutorial.spring.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +15,16 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PropertyServiceImpl implements PropertyService{
 
+    private final UserRepository userRepository;
     private final PropertyRepository propertyRepository;
     private final PropertyMapper propertyMapper;
 
     @Override
     public Property createProperty(PropertyDto propertyDto) {
-        return propertyRepository.save(propertyMapper.propertyDtoToProperty(propertyDto, null));
+        userRepository.findById(propertyDto.getUser_id());
+        Property property = propertyMapper.propertyDtoToProperty(propertyDto, null);
+        property.setUser(userRepository.findById(propertyDto.getUser_id()).get());
+        return propertyRepository.save(property);
     }
 
     @Override
@@ -28,10 +33,8 @@ public class PropertyServiceImpl implements PropertyService{
     }
 
     @Override
-    public List<Property> readAllUsers() {
-        List<Property> properties = new ArrayList<>();
-        propertyRepository.findAll().forEach(properties::add);
-        return properties;
+    public List<Property> readAllProperties() {
+        return propertyRepository.findAll();
     }
 
     @Override

@@ -3,8 +3,6 @@ package com.tutorial.spring.property.web;
 import com.tutorial.spring.property.domain.Property;
 import com.tutorial.spring.property.propertyDto.PropertyDto;
 import com.tutorial.spring.property.service.PropertyService;
-import com.tutorial.spring.user.domain.User;
-import com.tutorial.spring.user.dto.UserDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,7 +25,7 @@ public class PropertyController {
 
     @GetMapping("/all")
     ResponseEntity<List<Property>> rcGetByAll() {
-        return ResponseEntity.ok(propertyService.readAllUsers());
+        return ResponseEntity.ok(propertyService.readAllProperties());
     }
 
     @PutMapping("/{id}")

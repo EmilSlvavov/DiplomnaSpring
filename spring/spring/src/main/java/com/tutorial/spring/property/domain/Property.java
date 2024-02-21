@@ -1,5 +1,6 @@
 package com.tutorial.spring.property.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tutorial.spring.user.domain.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,5 @@ public class Property {
     private String address;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 }

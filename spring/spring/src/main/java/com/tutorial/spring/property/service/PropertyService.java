@@ -11,7 +11,7 @@ public interface PropertyService {
 
         Optional<Property> readProperty(Integer id);
 
-        List<Property> readAllUsers();
+        List<Property> readAllProperties();
 
         Property updateProperty(Integer id, PropertyDto propertyDto);
         void deleteProperty(Integer id);
