@@ -1,9 +1,7 @@
 package com.tutorial.spring.property.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.tutorial.spring.user.domain.User;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,4 +18,8 @@ public class Property {
     private Integer id;
     private String name;
     private String address;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

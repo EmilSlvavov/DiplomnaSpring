@@ -1,13 +1,15 @@
 package com.tutorial.spring.user.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.tutorial.spring.property.domain.Property;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
+
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,4 +21,7 @@ public class User {
     private Integer id;
     private String name;
     private String email;
+
+    @OneToMany(mappedBy = "user")
+    private List<Property> properties;
 }
