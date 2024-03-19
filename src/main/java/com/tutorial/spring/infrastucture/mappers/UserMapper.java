@@ -1,6 +1,7 @@
 package com.tutorial.spring.infrastucture.mappers;
 
 import com.tutorial.spring.domain.user.dto.UserDto;
+import com.tutorial.spring.domain.user.dto.UserRegisterDto;
 import com.tutorial.spring.domain.user.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,4 +14,6 @@ public interface UserMapper {
     @Mapping(target = "id", source = "id")
     User userDtoToUser(UserDto user, Integer id);
 
+    @Mapping(target = "id", source = "id")
+    User userRegisterDtoToUser(UserRegisterDto user, Integer id);
 }

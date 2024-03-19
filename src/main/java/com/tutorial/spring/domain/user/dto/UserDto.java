@@ -17,4 +17,5 @@ public class UserDto {
     private String Name;
     @Email
     private String email;
+
 }

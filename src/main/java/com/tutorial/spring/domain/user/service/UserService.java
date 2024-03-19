@@ -2,6 +2,7 @@ package com.tutorial.spring.domain.user.service;
 
 
 import com.tutorial.spring.domain.user.dto.UserDto;
+import com.tutorial.spring.domain.user.dto.UserRegisterDto;
 import com.tutorial.spring.domain.user.entity.User;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +10,8 @@ import java.util.Optional;
 public interface UserService {
 
     User createUser(UserDto userDto);
+
+    User userRegister(UserRegisterDto userRegisterDto);
 
     Optional<User> readUser(Integer id);
 

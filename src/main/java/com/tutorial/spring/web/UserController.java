@@ -2,6 +2,7 @@ package com.tutorial.spring.web;
 
 
 import com.tutorial.spring.domain.user.dto.UserDto;
+import com.tutorial.spring.domain.user.dto.UserRegisterDto;
 import com.tutorial.spring.domain.user.entity.User;
 import com.tutorial.spring.domain.user.service.UserService;
 import com.tutorial.spring.infrastucture.security.authorization.AuthorizationService;
@@ -50,6 +51,11 @@ public class UserController {
     @PostMapping
     ResponseEntity<User> rcPostBody(@Valid @RequestBody UserDto user) {
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/register")
+    ResponseEntity<User> registerUser(@Valid @RequestBody UserRegisterDto userRegisterDto) {
+        return new ResponseEntity<>(userService.userRegister(userRegisterDto), HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('ADMIN') || @authorizationService.isAccessingSelf(#id, authentication.principal.user.id)")
