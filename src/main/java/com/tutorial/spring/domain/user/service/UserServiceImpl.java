@@ -2,6 +2,7 @@ package com.tutorial.spring.domain.user.service;
 
 import com.tutorial.spring.domain.role.Role;
 import com.tutorial.spring.domain.role.RoleType;
+import com.tutorial.spring.domain.role.repository.RoleRepository;
 import com.tutorial.spring.domain.user.dto.UserDto;
 import com.tutorial.spring.domain.user.dto.UserRegisterDto;
 import com.tutorial.spring.domain.user.entity.User;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
 
     @Override
     public User createUser(UserDto userDto) {
@@ -31,8 +33,7 @@ public class UserServiceImpl implements UserService {
     public User userRegister(UserRegisterDto userRegisterDto) {
         userRegisterDto.setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));
         User user = userMapper.userRegisterDtoToUser(userRegisterDto, null);
-        Role role = new Role(RoleType.ROLE_USER.getName());
-        role.setId(1L);
+        Role role = roleRepository.getByName(RoleType.ROLE_USER.getName()).get();
         user.setRole(role);
         return userRepository.save(user);
     }
@@ -52,7 +53,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(Integer id, UserDto userDto) {
-        return userRepository.save(userMapper.userDtoToUser(userDto, id));
+        User byId = userRepository.findById(id).get();
+        userMapper.updateUser(byId, userDto);
+        return userRepository.save(byId);
     }
 
     @Override

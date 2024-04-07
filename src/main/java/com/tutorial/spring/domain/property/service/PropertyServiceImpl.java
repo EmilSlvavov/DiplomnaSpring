@@ -8,6 +8,9 @@ import com.tutorial.spring.infrastucture.mappers.PropertyMapper;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,8 +35,9 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public List<Property> readAllProperties() {
-        return propertyRepository.findAll();
+    public Page<Property> readAllProperties(Specification<Property> specification,
+        Pageable pageable) {
+        return propertyRepository.findAll(specification, pageable);
     }
 
     @Override

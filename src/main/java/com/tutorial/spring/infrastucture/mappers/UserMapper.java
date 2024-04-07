@@ -5,6 +5,7 @@ import com.tutorial.spring.domain.user.dto.UserRegisterDto;
 import com.tutorial.spring.domain.user.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
@@ -16,4 +17,6 @@ public interface UserMapper {
 
     @Mapping(target = "id", source = "id")
     User userRegisterDtoToUser(UserRegisterDto user, Integer id);
+
+    void updateUser(@MappingTarget User user, UserDto userDto);
 }

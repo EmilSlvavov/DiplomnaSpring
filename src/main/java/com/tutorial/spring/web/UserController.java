@@ -35,13 +35,13 @@ public class UserController {
         return ResponseEntity.ok(userService.readUser(id));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all")
     ResponseEntity<List<User>> rcGetByAll() {
         return ResponseEntity.ok(userService.readAllUsers());
     }
 
-    @PreAuthorize("hasRole('ADMIN') || @authorizationService.isAccessingSelf(#id, authentication.principal.user.id)")
+    @PreAuthorize("hasAuthority('ADMIN') || @authorizationService.isAccessingSelf(#id, authentication.principal.user.id)")
     @PutMapping("/{id}")
     ResponseEntity<User> rcRequestBody(@PathVariable Integer id, @Valid @RequestBody UserDto user) {
 
@@ -58,7 +58,7 @@ public class UserController {
         return new ResponseEntity<>(userService.userRegister(userRegisterDto), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole('ADMIN') || @authorizationService.isAccessingSelf(#id, authentication.principal.user.id)")
+    @PreAuthorize("hasAuthority('ADMIN') || @authorizationService.isAccessingSelf(#id, authentication.principal.user.id)")
     @DeleteMapping("/{id}")
     ResponseEntity<?> rcDeleteBody(@PathVariable Integer id) {
         userService.deleteUser(id);

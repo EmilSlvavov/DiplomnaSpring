@@ -40,6 +40,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Property> properties;
 
+
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     private Role role;
