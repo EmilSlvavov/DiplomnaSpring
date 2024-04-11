@@ -31,6 +31,7 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private String phoneNumber;
     @JsonIgnore
     private Boolean locked;
     @JsonIgnore

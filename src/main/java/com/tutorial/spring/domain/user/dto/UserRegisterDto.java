@@ -19,6 +19,10 @@ public class UserRegisterDto {
     private String Name;
     @Email
     private String email;
+    @Pattern(regexp = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$",
+    message = "Incorrect phone number")
+    private String phoneNumber;
+
     @NotBlank
     @Size(min = 8, message = "Password should be at least 8 characters.")
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$",
