@@ -16,6 +16,7 @@ public interface UserMapper {
     User userDtoToUser(UserDto user, Integer id);
 
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "phoneNumber", source = "user.phoneNumber")
     User userRegisterDtoToUser(UserRegisterDto user, Integer id);
 
     void updateUser(@MappingTarget User user, UserDto userDto);

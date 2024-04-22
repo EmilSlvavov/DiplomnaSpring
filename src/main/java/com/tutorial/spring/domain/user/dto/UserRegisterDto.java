@@ -29,3 +29,4 @@ public class UserRegisterDto {
         message = "Password should contain 1 uppercase, 1 lowercase, 1 digit and a special symbol.")
     private String password;
 }
+

@@ -1,0 +1,32 @@
+package com.tutorial.spring.domain.property.enums;
+
+public enum City {
+    Blagoevgrad,
+        Burgas,
+        Dobrich,
+        Gabrovo,
+        Haskovo,
+        Kardzhali,
+        Kyustendil,
+        Lovech,
+        Montana,
+        Pazardzhik,
+        Pernik,
+        Pleven,
+        Plovdiv,
+        Razgrad,
+        Ruse,
+        Shumen,
+        Silistra,
+        Sliven,
+        Smolyan,
+        Sofia_City,
+        Sofia_Province,
+        Stara_Zagora,
+        Targovishte,
+        Varna,
+        Veliko_Tarnovo,
+        Vidin,
+        Vratsa,
+        Yambol;
+}

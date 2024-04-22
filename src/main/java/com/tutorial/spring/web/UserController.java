@@ -6,6 +6,7 @@ import com.tutorial.spring.domain.user.dto.UserRegisterDto;
 import com.tutorial.spring.domain.user.entity.User;
 import com.tutorial.spring.domain.user.service.UserService;
 import com.tutorial.spring.infrastucture.security.authorization.AuthorizationService;
+import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
