@@ -2,9 +2,12 @@ package com.tutorial.spring.web;
 
 
 import com.tutorial.spring.domain.user.dto.UserDto;
+import com.tutorial.spring.domain.user.dto.UserMeDto;
 import com.tutorial.spring.domain.user.dto.UserRegisterDto;
 import com.tutorial.spring.domain.user.entity.User;
 import com.tutorial.spring.domain.user.service.UserService;
+import com.tutorial.spring.infrastucture.mappers.UserMapper;
+import com.tutorial.spring.infrastucture.security.authentication.CustomUserDetails;
 import com.tutorial.spring.infrastucture.security.authorization.AuthorizationService;
 import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
@@ -14,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,10 +34,18 @@ public class UserController {
 
     private final UserService userService;
     private final AuthorizationService authorizationService;
+    private final UserMapper userMapper;
 
     @GetMapping("/{id}")
-    ResponseEntity<Optional<User>> rcGetById(@PathVariable Integer id) {
-        return ResponseEntity.ok(userService.readUser(id));
+    ResponseEntity<User> rcGetById(@PathVariable Integer id) {
+        return ResponseEntity.ok(userService.readUser(id).get());
+    }
+
+    @GetMapping("/me")
+    ResponseEntity<UserMeDto> getCurrentUser() {
+        CustomUserDetails principal1 = (CustomUserDetails) SecurityContextHolder.getContext()
+            .getAuthentication().getPrincipal();
+        return ResponseEntity.ok(userMapper.userToUserMeDto(userService.readUser(principal1.getUser().getId()).get()));
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -45,7 +57,6 @@ public class UserController {
     @PreAuthorize("hasAuthority('ADMIN') || @authorizationService.isAccessingSelf(#id, authentication.principal.user.id)")
     @PutMapping("/{id}")
     ResponseEntity<User> rcRequestBody(@PathVariable Integer id, @Valid @RequestBody UserDto user) {
-
         return ResponseEntity.ok(userService.updateUser(id, user));
     }
 

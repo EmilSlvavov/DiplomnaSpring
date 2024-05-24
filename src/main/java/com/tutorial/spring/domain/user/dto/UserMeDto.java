@@ -1,8 +1,6 @@
 package com.tutorial.spring.domain.user.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,14 +10,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
-
-    @NotEmpty
+public class UserMeDto {
+    private Integer id;
+    @NotNull
     private String name;
-    @Email
+    @NotNull
     private String email;
-    @Pattern(regexp = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$",
-        message = "Incorrect phone number")
+    @NotNull
     private String phoneNumber;
     private String imageName;
 

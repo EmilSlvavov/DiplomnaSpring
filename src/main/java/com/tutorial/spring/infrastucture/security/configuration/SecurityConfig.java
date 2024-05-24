@@ -74,6 +74,12 @@ public class SecurityConfig {
                 authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
                     .requestMatchers("/authenticate")
                     .permitAll()
+                    .requestMatchers("/images/**")
+                    .permitAll()
+                    .requestMatchers("/properties/all")
+                    .permitAll()
+                    .requestMatchers("/properties/{id}")
+                    .permitAll()
                     .requestMatchers("/users/register")
                     .permitAll()
                     .requestMatchers("*/register")

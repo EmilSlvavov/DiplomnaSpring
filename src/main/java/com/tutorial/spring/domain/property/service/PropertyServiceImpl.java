@@ -23,7 +23,6 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public Property createProperty(PropertyDto propertyDto, Integer id) {
-        userRepository.findById(propertyDto.getUserId());
         Property property = propertyMapper.propertyDtoToProperty(propertyDto, null);
         property.setUser(userRepository.findById(id).get());
         return propertyRepository.save(property);

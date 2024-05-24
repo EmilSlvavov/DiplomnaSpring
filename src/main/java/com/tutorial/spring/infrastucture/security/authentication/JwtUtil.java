@@ -22,7 +22,7 @@ public class JwtUtil {
     @Value("${jwt.token.secret}")
     private String secretKey;
 
-    @Value("1800000")
+    @Value("18000000")
     private Long expiration;
 
     @Value("Bearer")

@@ -1,6 +1,7 @@
 package com.tutorial.spring.infrastucture.mappers;
 
 import com.tutorial.spring.domain.user.dto.UserDto;
+import com.tutorial.spring.domain.user.dto.UserMeDto;
 import com.tutorial.spring.domain.user.dto.UserRegisterDto;
 import com.tutorial.spring.domain.user.entity.User;
 import org.mapstruct.Mapper;
@@ -20,4 +21,6 @@ public interface UserMapper {
     User userRegisterDtoToUser(UserRegisterDto user, Integer id);
 
     void updateUser(@MappingTarget User user, UserDto userDto);
+
+    UserMeDto userToUserMeDto(User user);
 }

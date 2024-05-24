@@ -28,7 +28,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Integer id;
     @NotNull
     private String name;
@@ -42,6 +41,8 @@ public class User {
     private Boolean locked;
     @JsonIgnore
     private Boolean enabled;
+
+    private String imageName;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
