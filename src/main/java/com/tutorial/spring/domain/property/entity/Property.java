@@ -46,6 +46,7 @@ public class Property {
     private BigDecimal pricePerSqMeter;
     @NotNull
     private Double sqMeters;
+    private BigDecimal totalPrice;
     @NotNull
     private Integer floor;
     private Integer totalBuildingFloors;

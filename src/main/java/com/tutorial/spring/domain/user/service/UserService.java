@@ -6,6 +6,8 @@ import com.tutorial.spring.domain.user.dto.UserRegisterDto;
 import com.tutorial.spring.domain.user.entity.User;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface UserService {
 
@@ -15,7 +17,7 @@ public interface UserService {
 
     Optional<User> readUser(Integer id);
 
-    List<User> readAllUsers();
+    Page<User> readAllUsers(String name, Pageable pageable);
 
     User updateUser(Integer id, UserDto userDto);
 

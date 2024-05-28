@@ -5,6 +5,7 @@ import com.tutorial.spring.domain.property.propertyDto.PropertyDto;
 import com.tutorial.spring.domain.property.repository.PropertyRepository;
 import com.tutorial.spring.domain.user.repository.UserRepository;
 import com.tutorial.spring.infrastucture.mappers.PropertyMapper;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public Property createProperty(PropertyDto propertyDto, Integer id) {
         Property property = propertyMapper.propertyDtoToProperty(propertyDto, null);
+        property.setTotalPrice(property.getPricePerSqMeter().multiply(BigDecimal.valueOf(property.getSqMeters())));
         property.setUser(userRepository.findById(id).get());
         return propertyRepository.save(property);
     }
@@ -41,7 +43,9 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public Property updateProperty(Integer id, PropertyDto propertyDto) {
-        return propertyRepository.save(propertyMapper.propertyDtoToProperty(propertyDto, id));
+        Property property = propertyMapper.propertyDtoToProperty(propertyDto, id);
+        property.setTotalPrice(property.getPricePerSqMeter().multiply(BigDecimal.valueOf(property.getSqMeters())));
+        return propertyRepository.save(property);
     }
 
     @Override

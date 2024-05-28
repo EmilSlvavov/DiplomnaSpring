@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,10 +49,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> readAllUsers() {
-        List<User> users = new ArrayList<>();
-        userRepository.findAll().forEach(users::add);
-        return users;
+    public Page<User> readAllUsers(String name, Pageable pageable) {
+        if (name== null) {
+            return userRepository.findAll(pageable);
+        }
+        return userRepository.findByNameContaining(name, pageable);
     }
 
     @Override
