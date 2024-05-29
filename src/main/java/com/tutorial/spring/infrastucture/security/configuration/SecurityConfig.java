@@ -60,7 +60,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type", "Access-Control-Allow-Origin"));
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost"));
+        corsConfiguration.setAllowedOrigins(List.of("https://emil-proekt.popetsmaster.com"));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE","OPTIONS","PATCH", "DELETE"));
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.setExposedHeaders(List.of("Authorization","Cache-Control", "Content-Type", "Access-Control-Allow-Origin"));
@@ -75,6 +75,8 @@ public class SecurityConfig {
                     .requestMatchers("/authenticate")
                     .permitAll()
                     .requestMatchers("/users/all")
+                    .permitAll()
+                    .requestMatchers("/users/{id}")
                     .permitAll()
                     .requestMatchers("/images/**")
                     .permitAll()
