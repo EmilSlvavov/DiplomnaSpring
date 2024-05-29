@@ -6,6 +6,5 @@ import lombok.Getter;
 public enum PropertyType {
     HOUSE,
     APARTMENT,
-    LAND,
     OFFICE;
 }
